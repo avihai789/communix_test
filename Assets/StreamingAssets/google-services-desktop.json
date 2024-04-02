@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "738171470920",
+    "project_id": "comunix-test-2199f",
+    "storage_bucket": "comunix-test-2199f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738171470920:android:1dff17dd470ad6dda9047d",
+        "android_client_info": {
+          "package_name": "com.zeligman.comunix.firebase.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxT6L8L9lfzE69LAMl8scl4UR4AERDEQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
