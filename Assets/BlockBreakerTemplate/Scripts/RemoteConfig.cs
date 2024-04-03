@@ -1,11 +1,22 @@
 using Firebase.Extensions;
 using Firebase.RemoteConfig;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using Newtonsoft.Json;
+
+[Serializable]
+public class AllDifficulties
+{
+    public Difficulty Easy;
+    public Difficulty Medium;
+    public Difficulty Hard;
+}
 
 public class RemoteConfig : MonoBehaviour
 {
+    
     private void Awake()
     {
         CheckRemoteConfigValues();
@@ -39,11 +50,18 @@ public class RemoteConfig : MonoBehaviour
                 Debug.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}.");
 
                 print("Total values: "+remoteConfig.AllValues.Count);
-
-                foreach (var item in remoteConfig.AllValues)
+                
+                string configData = remoteConfig.GetValue("Game_configs").StringValue;
+                try
                 {
-                    print("Key :" + item.Key);
-                    print("Value: " + item.Value.StringValue);
+
+                    var allDifficulties = JsonConvert.DeserializeObject<AllDifficulties>(configData);
+                    print(allDifficulties);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.Message);
+                    throw;
                 }
 
             });
