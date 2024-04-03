@@ -17,6 +17,8 @@ public class AllDifficulties
 public class RemoteConfig : MonoBehaviour
 {
     
+    public event Action<AllDifficulties> OnRemoteConfigValuesFetched;
+    
     private void Awake()
     {
         CheckRemoteConfigValues();
@@ -47,16 +49,12 @@ public class RemoteConfig : MonoBehaviour
         remoteConfig.ActivateAsync()
           .ContinueWithOnMainThread(
             task => {
-                Debug.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}.");
-
-                print("Total values: "+remoteConfig.AllValues.Count);
                 
                 string configData = remoteConfig.GetValue("Game_configs").StringValue;
                 try
                 {
-
                     var allDifficulties = JsonConvert.DeserializeObject<AllDifficulties>(configData);
-                    print(allDifficulties);
+                    OnRemoteConfigValuesFetched?.Invoke(allDifficulties);
                 }
                 catch (Exception e)
                 {
