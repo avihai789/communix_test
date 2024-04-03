@@ -5,17 +5,19 @@ public class MenuUI : MonoBehaviour
 {
 	[SerializeField] private DifficultyButtonsContainer difficultyButtonsContainer;
 	[SerializeField] private GameObject menuPanel;
-	[SerializeField] private RemoteConfig remoteConfig;
+	private RemoteConfig _remoteConfig;
 
 	private void Start()
 	{
+		_remoteConfig = new RemoteConfig();
+		_remoteConfig.CheckRemoteConfigValues();
 		difficultyButtonsContainer.OnDifficultyChosenEvent += OnDifficultyChosen;
-		remoteConfig.OnRemoteConfigValuesFetched += OnRemoteConfigValuesFetched;
+		_remoteConfig.OnRemoteConfigValuesFetched += OnRemoteConfigValuesFetched;
 	}
 
 	private void OnRemoteConfigValuesFetched(Dictionary<string, Difficulty> allDifficulties)
 	{
-		remoteConfig.OnRemoteConfigValuesFetched -= OnRemoteConfigValuesFetched;
+		_remoteConfig.OnRemoteConfigValuesFetched -= OnRemoteConfigValuesFetched;
 		difficultyButtonsContainer.SetData(allDifficulties);
 	}
 

@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json;
 
-public class RemoteConfig : MonoBehaviour
+public class RemoteConfig
 {
-    
     public event Action<Dictionary<string, Difficulty>> OnRemoteConfigValuesFetched;
-    
-    private void Awake()
-    {
-        CheckRemoteConfigValues();
-    }
 
     public Task CheckRemoteConfigValues()
     {
