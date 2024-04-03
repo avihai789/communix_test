@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Difficulty
 {
+    public string Name;
     public int Ball_speed;
     public int Ball_max_speed;
     public int Paddle_speed;

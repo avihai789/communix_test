@@ -14,7 +14,7 @@ public class DifficultyButton : MonoBehaviour
     
     public void SetButtonData(Difficulty difficulty)
     {
-        difficultyText.text = difficulty.ToString();
+        difficultyText.text = difficulty.Name;
         _difficulty = difficulty;
     }
     
