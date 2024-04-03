@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -13,6 +14,12 @@ public class GameUI : MonoBehaviour
 	public Text gameOverScoreText;	//The Text component that will display the score when the player lost
 
 	public GameObject winScreen;	//The win screen game object
+
+	private void Start()
+	{
+		manager.GameWin += SetWin;
+		manager.GameOver += SetGameOver;
+	}
 
 	void Update ()
 	{
@@ -50,5 +57,11 @@ public class GameUI : MonoBehaviour
 	public void MenuButton ()
 	{
 		Application.LoadLevel(0);	//Loads the 'Menu' scene
+	}
+
+	private void OnDestroy()
+	{
+		manager.GameWin -= SetWin;
+		manager.GameOver -= SetGameOver;
 	}
 }

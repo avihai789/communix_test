@@ -10,6 +10,8 @@ public class DifficultyButtonsContainer : MonoBehaviour
     
     public event Action OnDifficultyChosenEvent;
     
+    private List<DifficultyButton> difficultyButtons = new List<DifficultyButton>();
+    
     public void SetData(Dictionary<string, Difficulty> allDifficulties)
     {
         SetDifficultyButtons(allDifficulties);
@@ -29,11 +31,17 @@ public class DifficultyButtonsContainer : MonoBehaviour
     {
         var button = Instantiate(difficultyButton, transform);
         button.SetButtonData(difficulty);
+        difficultyButtons.Add(button);
         button.OnClickEvent += OnDifficultyButtonClick;
     }
 
     private void OnDifficultyButtonClick(Difficulty obj)
     {
+        foreach (var button in difficultyButtons)
+        {
+            button.OnClickEvent -= OnDifficultyButtonClick;
+            Destroy(button.gameObject);
+        }
         gameObject.SetActive(false);
         OnDifficultyChosenEvent?.Invoke();
     }

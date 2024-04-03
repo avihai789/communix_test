@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour 
@@ -12,8 +12,7 @@ public class GameManager : MonoBehaviour
 
 	public GameObject paddle;		//The paddle game object
 	public GameObject ball;			//The ball game object
-
-	public GameUI gameUI;			//The GameUI class
+			//The GameUI class
 
 	//Prefabs
 	public GameObject brickPrefab;	//The prefab of the Brick game object which will be spawned
@@ -24,6 +23,8 @@ public class GameManager : MonoBehaviour
 
 	public Color[] colors;			//The color array of the bricks. This can be modified to create different brick color patterns
 
+	public event Action GameOver;
+	public event Action GameWin;
 	void Start ()
 	{
 		StartGame(); //Starts the game by setting values and spawning bricks
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
 		wonGame = true;
 		paddle.active = false;			//Disables the paddle so it's invisible
 		ball.active = false;			//Disables the ball so it's invisible
-		gameUI.SetWin();				//Set the game over UI screen
+		GameWin?.Invoke();				//Set the game over UI screen
 	}
 
 	//Called when the ball goes under the paddle and "dies"
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
 			gameOver = true;
 			paddle.active = false;						//Disables the paddle so it's invisible
 			ball.active = false;						//Disables the ball so it's invisible
-			gameUI.SetGameOver();						//Set the game over UI screen
+			GameOver?.Invoke();						//Set the game over UI screen
 
 			for(int x = 0; x < bricks.Count; x++){		//Loops through the 'bricks' list
 				Destroy(bricks[x]);						//Destory the brick
