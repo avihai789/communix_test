@@ -6,18 +6,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json;
 
-[Serializable]
-public class AllDifficulties
-{
-    public Difficulty Easy;
-    public Difficulty Medium;
-    public Difficulty Hard;
-}
-
 public class RemoteConfig : MonoBehaviour
 {
     
-    public event Action<AllDifficulties> OnRemoteConfigValuesFetched;
+    public event Action<Dictionary<string, Difficulty>> OnRemoteConfigValuesFetched;
     
     private void Awake()
     {
@@ -53,7 +45,9 @@ public class RemoteConfig : MonoBehaviour
                 string configData = remoteConfig.GetValue("Game_configs").StringValue;
                 try
                 {
-                    var allDifficulties = JsonConvert.DeserializeObject<AllDifficulties>(configData);
+                    Dictionary<string, Difficulty> allDifficulties = 
+                        JsonConvert.DeserializeObject<Dictionary<string, Difficulty>>(configData);
+                    
                     OnRemoteConfigValuesFetched?.Invoke(allDifficulties);
                 }
                 catch (Exception e)

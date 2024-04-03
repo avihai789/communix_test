@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour 
@@ -15,7 +16,7 @@ public class MenuUI : MonoBehaviour
 		remoteConfig.OnRemoteConfigValuesFetched += OnRemoteConfigValuesFetched;
 	}
 
-	private void OnRemoteConfigValuesFetched(AllDifficulties allDifficulties)
+	private void OnRemoteConfigValuesFetched(Dictionary<string, Difficulty> allDifficulties)
 	{
 		remoteConfig.OnRemoteConfigValuesFetched -= OnRemoteConfigValuesFetched;
 		difficultyButtonsContainer.SetData(allDifficulties);

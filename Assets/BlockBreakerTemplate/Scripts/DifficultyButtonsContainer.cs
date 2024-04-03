@@ -10,17 +10,18 @@ public class DifficultyButtonsContainer : MonoBehaviour
     
     public event Action OnDifficultyChosenEvent;
     
-    public void SetData(AllDifficulties allDifficulties)
+    public void SetData(Dictionary<string, Difficulty> allDifficulties)
     {
         SetDifficultyButtons(allDifficulties);
         GetComponent<VerticalLayoutGroup>().enabled = false;
         GetComponent<ContentSizeFitter>().enabled = false;
     }
-    private void SetDifficultyButtons(AllDifficulties allDifficulties)
+    private void SetDifficultyButtons(Dictionary<string, Difficulty> allDifficulties)
     {
-        InstantiateDifficultyButton(allDifficulties.Easy);
-        InstantiateDifficultyButton(allDifficulties.Medium);
-        InstantiateDifficultyButton(allDifficulties.Hard);
+        foreach (var difficulty in allDifficulties.Values)
+        {
+            InstantiateDifficultyButton(difficulty);
+        }
         LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
     }
 
