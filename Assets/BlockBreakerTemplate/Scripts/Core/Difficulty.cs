@@ -9,4 +9,5 @@ public class Difficulty
     public int Ball_speed;
     public int Ball_max_speed;
     public int Paddle_speed;
+    public int Ball_speed_increment;
 }

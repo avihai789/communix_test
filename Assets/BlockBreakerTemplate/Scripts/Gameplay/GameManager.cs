@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Core;
 
 public class GameManager : MonoBehaviour 
 {
@@ -41,6 +42,16 @@ public class GameManager : MonoBehaviour
 		ball.active = true;
 		paddle.GetComponent<Paddle>().ResetPaddle();
 		CreateBrickArray();
+		UpdateConfigValues();
+	}
+	
+	public void UpdateConfigValues()
+	{
+		var currentDifficulty = DataHolder.CurrentDifficulty;
+		ballSpeedIncrement = currentDifficulty.Ball_speed_increment;
+		ball.GetComponent<Ball>().currentSpeed = currentDifficulty.Ball_speed;
+		ball.GetComponent<Ball>().maxSpeed = currentDifficulty.Ball_max_speed;
+		paddle.GetComponent<Paddle>().speed = currentDifficulty.Paddle_speed;
 	}
 
 	//Spawns the bricks and sets their colours

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,13 +36,16 @@ public class DifficultyButtonsContainer : MonoBehaviour
         button.OnClickEvent += OnDifficultyButtonClick;
     }
 
-    private void OnDifficultyButtonClick(Difficulty obj)
+    private void OnDifficultyButtonClick(Difficulty difficulty)
     {
+        DataHolder.CurrentDifficulty = difficulty;
+        
         foreach (var button in difficultyButtons)
         {
             button.OnClickEvent -= OnDifficultyButtonClick;
             Destroy(button.gameObject);
         }
+        
         gameObject.SetActive(false);
         OnDifficultyChosenEvent?.Invoke();
     }

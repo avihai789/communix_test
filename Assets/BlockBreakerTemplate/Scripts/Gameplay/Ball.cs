@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
 	public GameManager manager;		//The GameManager
 	public bool goingLeft;			//Set to true when the ball is going left
 	public bool goingDown;			//Set to true xwhen the ball is going down
-
+	public int currentSpeed = 200;
 	void Start ()
 	{
 		transform.position = Vector3.zero;		//Sets the ball position to the middle of the screen
@@ -78,6 +78,6 @@ public class Ball : MonoBehaviour
 	{
 		speed = 0;
 		yield return new WaitForSeconds(1.0f);	//Wait 1 second
-		speed = 200;
+		speed = currentSpeed;
 	}
 }
